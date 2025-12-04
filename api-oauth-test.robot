@@ -10,10 +10,10 @@ OAuth2 Google Flow With Beeceptor Mock
     ...                2) Call the Google userinfo endpoint with the Bearer token
     ...                3) Validate the mock profile data
 
-    # Create HTTP session against Beeceptor OAuth mock server
+    # Step 1 - Create HTTP session against Beeceptor OAuth mock server.
     Create Session    oauth    ${BASE_URL}
 
-    # Step 1 – Exchange authorization code for an access token
+    # Exchange authorization code for an access token.
     &{token_body} =      Create Dictionary
     ...                  grant_type=authorization_code
     ...                  code=dummy-auth-code
@@ -32,13 +32,13 @@ OAuth2 Google Flow With Beeceptor Mock
 
     Should Be Equal As Integers    ${token_resp.status_code}    200
 
-    # Extract access_token from JSON response
+    # Extract access_token from JSON response.
     ${access_token} =     Evaluate    $token_resp.json().get("access_token")
     Should Not Be Empty  ${access_token}
 
     Log To Console       \nAccess token from Beeceptor: ${access_token}
 
-    # Step 2 – Call userinfo endpoint with Bearer token
+    # Step 2 – Call userinfo endpoint with Bearer token.
     &{userinfo_headers} =   Create Dictionary
     ...                     Authorization=Bearer ${access_token}
 
@@ -49,7 +49,7 @@ OAuth2 Google Flow With Beeceptor Mock
 
     Should Be Equal As Integers    ${userinfo_resp.status_code}    200
 
-    # Step 3 – Validate mock user profile payload
+    # Step 3 – Validate mock user profile payload.
     ${profile} =          Evaluate    $userinfo_resp.json()
 
     ${sub} =              Evaluate    $profile.get("sub")
