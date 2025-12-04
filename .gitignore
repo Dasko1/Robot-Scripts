@@ -1,6 +1,14 @@
+<<<<<<< HEAD
 *.html
 output.xml
 *.png
 *.jpg
 *.jpeg
+=======
+*.html
+output.xml
+*.png
+*.jpg
+*.jpeg
+>>>>>>> cc5a20ab16f52176d7c2e8633ec43d18b7850a6b
 *.gif
